@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# running whoam i
+
+sudo -u "$1" whoami
