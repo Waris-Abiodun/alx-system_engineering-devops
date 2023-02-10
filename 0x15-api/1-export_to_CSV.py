@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 """Returns to-do list information for a given employee ID."""
 
+import csv
 import requests
 import sys
-import csv
 
 if __name__ == "__main__":
     """
@@ -28,4 +28,3 @@ if __name__ == "__main__":
         [writer.writerow(
             [sys.argv[1], username, dct.get("completed"), dct.get("title")])
          for dct in todos]
-
