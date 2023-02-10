@@ -26,9 +26,9 @@ if __name__ == "__main__":
         # and the value as a list of dictionaries, each containing information
         # about a to-do task
         data = {sys.argv[1]: [{
-                "task": t.get("title"),
-                "completed": t.get("completed"),
-                "username": username
-                 } for t in todos]}
+            "task": t.get("title"),
+            "completed": t.get("completed"),
+            "username": username
+            } for t in todos]}
 
         json.dump(data, JSONFile)
