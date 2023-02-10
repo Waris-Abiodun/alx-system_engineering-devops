@@ -1,33 +1,25 @@
 #!/usr/bin/python3
-"""Returns to-do list information for a given employee ID."""
-
+"""Exports to-do list information of all employees to JSON format."""
 import json
 import requests
 
-
 if __name__ == "__main__":
-    """
-    Main function of the script.
-    Retrieves employee information and to-do list information using the
-    REST API, and prints the to-do list progress for the employee.
-    """
-
-    # Base URL for the API endpoints
+    # base URL for the API endpoint
     url = "https://jsonplaceholder.typicode.com/"
-    # Endpoint to get employee info
-    user = requests.get(url + "users").json()
-    # Endpoint to get todo list for the employee
-    todos = requests.get(url + "todos").json()
 
-    # Write the user to-do list information to a JSON file
-    with open("todo_all_employees.json", "w") as JSONFile:
-        # Write the information as a dictionary, with the key as the user ID
-        # and the value as a list of dictionaries, each containing information
-        # about a to-do task
-        for dct in user:
-            data = {dct.get("id"): [{
-                "username": dct.get("username"),
+    # retrieve a list of all users from the API
+    users = requests.get(url + "users").json()
+
+    # create a JSON file to store the data for all employees
+    with open("todo_all_employees.json", "w") as jsonfile:
+        # write the data to the file
+        json.dump({
+            # iterate through the users
+            u.get("id"): [{
+                # add task information for each user
                 "task": t.get("title"),
-                "completed": t.get("completed")
-                 } for t in todos]}
-            json.dump(data, JSONFile)
+                "completed": t.get("completed"),
+                "username": u.get("username")
+            } for t in requests.get(url + "todos",
+                                    params={"userId": u.get("id")}).json()]
+            for u in users}, jsonfile)
