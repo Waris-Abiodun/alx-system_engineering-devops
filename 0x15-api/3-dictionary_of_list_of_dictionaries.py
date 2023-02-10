@@ -1,5 +1,3 @@
-Executable File  25 lines (22 sloc)  927 Bytes
-
 #!/usr/bin/python3
 """Exports to-do list information of all employees to JSON format."""
 import json
