@@ -26,8 +26,8 @@ if __name__ == "__main__":
         # about a to-do task
         for dct in user:
             data = {dct.get("id"): [{
+                "username": dct.get("username"),
                 "task": t.get("title"),
-                "completed": t.get("completed"),
-                "username": dct.get("username")
+                "completed": t.get("completed")
                  } for t in todos]}
             json.dump(data, JSONFile)
